@@ -12,6 +12,7 @@ import Container from './components/container';
 import ListPage from './pages/list';
 import DetailPage from './pages/detail';
 import DetailDialog from './components/detailDialog';
+import BackdropBase from './components/backdrop';
 
 const App = () => {
   const [state, dispatch] = useContext(StoreContext);
@@ -27,11 +28,16 @@ const App = () => {
 
   return (
     <Container>
-      <AppBar />
-      <ListPage />
-      <DetailDialog>
-        <DetailPage />
-      </DetailDialog>
+      <>
+        { (!state.shows || state.shows.length === 0) && (
+          <BackdropBase />
+        ) }
+        <AppBar />
+        <ListPage />
+        <DetailDialog>
+          <DetailPage />
+        </DetailDialog>
+      </>
     </Container>
   );
 }
