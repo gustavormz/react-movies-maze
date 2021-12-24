@@ -5,7 +5,9 @@ import {
   CardContent,
   Typography,
   Stack,
-  Link
+  Link,
+  Divider,
+  Grid
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
@@ -29,7 +31,7 @@ const renderRaiting = ({ rating }) => {
 const renderDays = ({
   days
 }) => days.map(day => (
-  <Chip label={ day }/>
+  <Chip key={ day } label={ day }/>
 ));
 
 const renderStatus = ({
@@ -62,36 +64,62 @@ const ShowCard = ({
 
     </CardMedia>
     <CardContent>
-      <Typography>
-        { renderStatus({ status }) }
-      </Typography>
-      <Typography
-        variant={ 'h5' }>
-        { name }
-      </Typography>
-      <Typography
-        variant={ 'h5' }>
-        { renderRaiting({ rating }) }
-      </Typography>
-      <Typography textAlign={ 'justify' }>
-        { summary }
-      </Typography>
-      <Typography>
-        Duration: { runtime }
-      </Typography>
-      <Typography>
-        <Stack direction="row" spacing={1}>
-          { renderDays(schedule) }
-        </Stack>
-      </Typography>
-      { schedule.time && (
-        <Typography>
-          Schedule Time: { schedule.time }
-        </Typography>
-      ) }
-      <Link target='_blank' href={ url }>
-        { linkText }
-      </Link>
+      <Grid container spacing={ 1 }>
+        <Grid item xs={ 12 }>
+          <Typography
+            variant={ 'h5' }>
+            { name }
+          </Typography>
+        </Grid>
+        <Grid item xs={ 12 }>
+          { renderRaiting({ rating }) }
+        </Grid>
+        <Grid item xs={ 12 }>
+          <Typography textAlign={ 'justify' }>
+            { summary }
+          </Typography>
+        </Grid>
+        <Grid item xs={ 12 }>
+          <Divider />
+        </Grid>
+        <Grid item xs={ 12 } sm={ 6 }>
+          <Typography>
+            Duration: { runtime }
+          </Typography>
+        </Grid>
+        <Grid
+          container
+          justifyContent={ 'flex-end' }
+          item xs={ 12 } sm={ 6 }>
+          { schedule.time && (
+            <Typography>
+              Time: { schedule.time }
+            </Typography>
+          ) }
+        </Grid>
+        <Grid item xs={ 12 }>
+          <Divider />
+        </Grid>
+        <Grid item xs={ 12 } sm={ 6 }>
+          <Stack direction="row" spacing={1}>
+            { renderDays(schedule) }
+          </Stack>
+        </Grid>
+        <Grid
+          container
+          justifyContent={ 'flex-end' }
+          item xs={ 12 } sm={ 6 }>
+          { renderStatus({ status }) }
+        </Grid>
+        <Grid item xs={ 12 }>
+          <Divider />
+        </Grid>
+        <Grid item xs={ 12 }>
+          <Link target='_blank' href={ url }>
+            { linkText }
+          </Link>
+        </Grid>
+      </Grid>
     </CardContent>
   </Card>
 );
