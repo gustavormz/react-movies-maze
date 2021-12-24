@@ -10,6 +10,8 @@ import { setShows } from './action/show';
 import AppBar from './components/appBar';
 import Container from './components/container';
 import ListPage from './pages/list';
+import DetailPage from './pages/detail';
+import DetailDialog from './components/detailDialog';
 
 const App = () => {
   const [state, dispatch] = useContext(StoreContext);
@@ -27,6 +29,9 @@ const App = () => {
     <Container>
       <AppBar />
       <ListPage />
+      <DetailDialog>
+        <DetailPage />
+      </DetailDialog>
     </Container>
   );
 }
