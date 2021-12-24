@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {
+  useEffect,
+  useContext
+} from 'react';
 
-function App() {
+import { showApi } from './lib/api';
+import { StoreContext } from './store';
+import { setShows } from './action/show';
+
+import AppBar from './components/appBar';
+import Container from './components/container';
+import ListPage from './pages/list';
+
+const App = () => {
+  const [state, dispatch] = useContext(StoreContext);
+
+  useEffect(() => {
+    const getAllShows = async () => {
+      const { isError, data } = await showApi.getAllShows();
+      dispatch(setShows({ shows: !isError ? data : [] }));
+    };
+
+    getAllShows();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <AppBar />
+      <ListPage />
+    </Container>
   );
 }
 
