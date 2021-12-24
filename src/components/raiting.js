@@ -1,14 +1,7 @@
 import { Star } from '@mui/icons-material';
 import { withStyles } from '@mui/styles';
 
-const styles = {
-  colorPrimary: {
-    color: 'red'
-  },
-  colorSecundary: {
-    color: 'black'
-  }
-};
+const styles = {};
 
 const RaitingIcon = withStyles(styles)(Star);
 
