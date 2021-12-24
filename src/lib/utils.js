@@ -50,7 +50,7 @@ const utils = (() => {
     } else {
       const hours = parseInt(runtimeParsed / 60);
       const minutes = runtimeParsed % 60;
-      return `${hours} h ${minutes > 0 ? `${minutes} m` : ''}`;
+      return `${hours}h ${minutes > 0 ? `${minutes}m` : ''}`;
     }
   };
 
