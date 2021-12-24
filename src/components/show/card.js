@@ -4,12 +4,14 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  Stack
+  Stack,
+  Link
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
 import RaitingIcon from '../raiting';
 import Chip from '../dayChip';
+import StatusChip from '../statusChip';
 
 const renderRaiting = ({ rating }) => {
   const ratingIcons = [];
@@ -30,13 +32,23 @@ const renderDays = ({
   <Chip label={ day }/>
 ));
 
+const renderStatus = ({
+  status
+}) => <StatusChip
+  label={ status }
+  color={ status === 'Ended' ? 'secondary' : 'primary' }/>;
+
 const ShowCard = ({
   image,
   component,
   name,
   schedule,
   rating,
-  runtime
+  runtime,
+  summary,
+  status,
+  url,
+  linkText
 }) => (
   <Card>
     <CardMedia
@@ -46,6 +58,9 @@ const ShowCard = ({
 
     </CardMedia>
     <CardContent>
+      <Typography>
+        { renderStatus({ status }) }
+      </Typography>
       <Typography
         variant={ 'h5' }>
         { name }
@@ -53,6 +68,9 @@ const ShowCard = ({
       <Typography
         variant={ 'h5' }>
         { renderRaiting({ rating }) }
+      </Typography>
+      <Typography textAlign={ 'justify' }>
+        { summary }
       </Typography>
       <Typography>
         Duration: { runtime }
@@ -67,6 +85,9 @@ const ShowCard = ({
           Schedule Time: { schedule.time }
         </Typography>
       ) }
+      <Link target='_blank' href={ url }>
+        { linkText }
+      </Link>
     </CardContent>
   </Card>
 );
@@ -76,11 +97,13 @@ ShowCard.propTypes = {
   component: PropTypes.string,
   name: PropTypes.string.isRequired,
   schedule: PropTypes.object,
-  runtime: PropTypes.string
+  runtime: PropTypes.string,
+  linkText: PropTypes.string
 };
 
 ShowCard.defaultProps = {
-  component: 'img'
+  component: 'img',
+  linkText: 'Go to Maze site'
 };
 
 export default ShowCard;
