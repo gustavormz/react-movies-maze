@@ -56,6 +56,8 @@ const utils = (() => {
 
   const removeTagsFromText = ({ text }) => text.replace(/<.*?>/gm, '');
 
+  const getPremieredFormat = ({ premiered }) => premiered.split('-')[0];
+
   const formatDataShow = ({ show }) => ({
     ...show,
     schedule: {
@@ -65,7 +67,8 @@ const utils = (() => {
     runtime: getRuntimeFormat({ runtime: show.runtime }),
     rating: show.rating.average,
     image: show.image.medium,
-    summary: removeTagsFromText({ text: show.summary })
+    summary: removeTagsFromText({ text: show.summary }),
+    premiered: getPremieredFormat({ premiered: show.premiered })
   });
 
   return {
