@@ -1,12 +1,17 @@
 import React from 'react';
 import {
   AppBar,
-  Toolbar
+  Toolbar,
+  Typography
 } from '@mui/material';
 
 const BaseAppBar = () => (
   <AppBar position='static'>
-    <Toolbar />
+    <Toolbar>
+      <Typography variant={ 'h5' }>
+        MovieCatalog
+      </Typography>
+    </Toolbar>
   </AppBar>
 );
 
