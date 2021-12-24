@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 const AppBarDialog = ({
   handleClose
 }) => (
-  <AppBar sx={{ position: 'relative' }}>
+  <AppBar color={ 'secondary' } sx={{ position: 'relative' }}>
     <Toolbar>
       <IconButton
         edge='end'
