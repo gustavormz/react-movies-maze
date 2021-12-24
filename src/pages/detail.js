@@ -7,12 +7,11 @@ import {
   Paper,
   Chip,
   Link,
-  Tooltip,
-  Backdrop,
-  CircularProgress
+  Tooltip
 } from '@mui/material';
 
 import StatusChip from '../components/statusChip';
+import BackdropBase from '../components/backdrop';
 
 import { StoreContext } from '../store/index';
 import { setShowDetails } from '../action/show';
@@ -35,11 +34,7 @@ const DetailPage = () => {
 
   if (!state.showDetails.image) {
     return (
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={ true }>
-        <CircularProgress />
-      </Backdrop>
+      <BackdropBase />
     );
   }
 
@@ -100,8 +95,8 @@ const DetailPage = () => {
         <Grid container>
           <Grid item xs={6}>
             { genres && genres.map((g, index) => (
-              <Tooltip title={ 'Genre' }>
-                <Chip sx={{ marginRight: '8px', marginBottom: '8px', marginTop: '8px' }} key={ index } label={ g }/>
+              <Tooltip title={ 'Genre' } key={ index }>
+                <Chip color={ 'primary' } sx={{ marginRight: '8px', marginBottom: '8px', marginTop: '8px' }} label={ g }/>
               </Tooltip>
             )) }
           </Grid>
@@ -110,7 +105,7 @@ const DetailPage = () => {
             justifyContent={ 'flex-end' }
             item xs={6}>
               <Tooltip title={ 'Status' }>
-                <StatusChip sx={{ marginBottom: '8px', marginTop: '8px' }} label={status}/>
+                <StatusChip color={ 'secondary' } sx={{ marginBottom: '8px', marginTop: '8px' }} label={status}/>
               </Tooltip>
           </Grid>
         </Grid>
