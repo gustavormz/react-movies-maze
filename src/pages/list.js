@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 
 import { StoreContext } from '../store';
-import { setPagination, getShowsByPagination } from '../action/show';
+import { setPagination, setShowId } from '../action/show';
 
 import ShowCard from '../components/show/card';
 import Pagination from '../components/pagination';
@@ -18,12 +18,18 @@ const ListPage = () => {
     dispatch(setPagination({ page: value }));
   };
 
+  const handleShowClick = ({ showId }) => {
+    dispatch(setShowId({ showId }));
+  };
+
   return (
     <Box sx={{ paddingTop: '14px', paddingBottom: '24px' }}>
       <Grid container spacing={2}>
         { state.showsToDisplay.map((show, index) => (
           <Grid key={`${show.name}-${index}`} item xs={12} md={3} sm={6}>
-            <ShowCard { ...show }/>
+            <ShowCard
+              handleShowClick={ handleShowClick }
+              { ...show }/>
           </Grid>
         )) }
         <Grid item xs={12}/>
