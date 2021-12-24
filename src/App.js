@@ -5,7 +5,7 @@ import React, {
 
 import { showApi } from './lib/api';
 import { StoreContext } from './store';
-import { setShows } from './action/show';
+import { setShows, setShowDetails } from './action/show';
 
 import AppBar from './components/appBar';
 import Container from './components/container';
@@ -25,6 +25,17 @@ const App = () => {
 
     getAllShows();
   }, []);
+
+  useEffect(() => {
+    const getShowById = async () => {
+      const { data, isError } = await showApi.getShowById({ id: state.showDetails.id });
+      if (!isError) {
+        delete data.id;
+        dispatch(setShowDetails({ showDetails: data }));
+      }
+    };
+    getShowById();
+  }, [state.showDetails.id]);
 
   return (
     <Container>
