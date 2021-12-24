@@ -39,6 +39,7 @@ const renderStatus = ({
   color={ status === 'Ended' ? 'secondary' : 'primary' }/>;
 
 const ShowCard = ({
+  id,
   image,
   component,
   name,
@@ -48,9 +49,12 @@ const ShowCard = ({
   summary,
   status,
   url,
-  linkText
+  linkText,
+  handleShowClick
 }) => (
-  <Card>
+  <Card
+    sx={{ cursor: 'pointer' }}
+    onClick={ () => handleShowClick({ showId: id }) }>
     <CardMedia
       image={ image }
       component={ component }
@@ -98,7 +102,12 @@ ShowCard.propTypes = {
   name: PropTypes.string.isRequired,
   schedule: PropTypes.object,
   runtime: PropTypes.string,
-  linkText: PropTypes.string
+  linkText: PropTypes.string,
+  handleShowClick: PropTypes.func,
+  summary: PropTypes.string,
+  status: PropTypes.string,
+  url: PropTypes.string,
+  id: PropTypes.number
 };
 
 ShowCard.defaultProps = {
